@@ -334,21 +334,32 @@ body {
 }
 
 /* Even rows = warm gold tint */
-.quote-table tbody tr:nth-child(even) td {
-    border: 1px solid #b8960c;
-    padding: 4px 3px;
-    vertical-align: middle;
-    background-color: rgba(218, 172, 20, 0.18);
-    font-weight: 700;
-    color: #1a1a1a;
+/* 1. السكوت عن العرض الثابت والسماح للجدول بالتكيف */
+.quote-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    text-align: center;
+    table-layout: auto; /* يجعل الخانات تتكيف حسب طول المحتوى بدلاً من التوزيع الثابت */
 }
 
+/* 2. ضبط الخلايا للتوسع تلقائياً مع المحتوى */
+.quote-table th, 
+.quote-table td {
+    white-space: normal; /* يسمح بالنزل لسطر جديد إذا كان النص طويلاً جداً */
+    word-break: break-word; /* يمنع خروج الكلمات الطويلة خارج الخلية */
+    padding: 4px 6px;
+}
+
+/* 3. جعل حقول الإدخال المرنة تتكيف مع حجم النص */
 .table-input {
     width: 100%;
+    min-width: 50px; /* حد أدنى مناسب لعدم اختفاء الحقل */
     text-align: center;
     font-size: 0.8rem;
+    box-sizing: border-box;
 }
-
 .table-select {
     width: 100%;
     text-align: center;
