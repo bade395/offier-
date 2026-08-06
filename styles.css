@@ -391,29 +391,26 @@ body {
 }
 .btn-del-row:hover { background: #dc2626; }
 
-/* Summary Box */
+/* 1. زيادة عرض جدول الإجماليات ليأخذ مساحة أكبر وتوسيطه */
 .totals-summary-container {
     display: flex;
     justify-content: center;
     margin-top: 6px;
+    width: 100%;
 }
 
-/* 1. جعل عرض الجدول مرن وإلغاء التوزيع الثابت */
 .totals-table {
     border-collapse: collapse;
-    width: auto; /* السماح للجدول بالتمدد حسب الحاجة بدلاً من 340px */
-    min-width: 340px; /* الحفاظ على حد أدنى للعرض للشكل الجمالي */
+    width: 100%; /* اجعل الجدول يمتد بعرض المنطقة المتاحة */
+    max-width: 500px; /* أو يمكنك زيادتها لـ 600px إذا أردته أعرض */
     font-size: 0.85rem;
     font-weight: 800;
-    table-layout: auto; /* تغيير من fixed إلى auto */
+    table-layout: auto;
 }
 
-/* 2. السماح للكلمات بالنزول لسطر جديد إذا لزم الأمر وإلغاء nowrap */
 .totals-table td {
     border: 1px solid #b8960c;
-    padding: 5px 10px;
-    white-space: normal; /* تغيير من nowrap إلى normal */
-    word-break: break-word; /* منع الكلمات من الخروج عن الخلية */
+    padding: 6px 12px;
 }
 
 .total-label {
@@ -421,30 +418,38 @@ body {
     color: #e8c84a;
     font-weight: 800;
     text-align: center;
+    width: 60%;
 }
 
+/* 2. ضبط خانة القيم لضمان وجود الرمز يسار الرقم دائماً في سطر واحد */
 .total-value {
     background-color: rgba(255, 253, 235, 0.9);
-    direction: ltr;
+    direction: ltr; /* يضمن الترتيب من اليسار لليمين: الرقم ثم الرمز أو العكس */
     font-family: sans-serif;
     color: #1a1a1a;
     text-align: center;
-    white-space: normal; /* السماح بتمدد النص */
+    white-space: nowrap; /* يمنع نزول الرمز أسفل/فوق الرقم نهائياً */
+    width: 40%;
 }
 
 .grand-total-row .total-label {
     background-color: #5a4a1e;
     color: #f0d060;
-    white-space: normal; /* السماح بتمدد النص بدلاً من nowrap */
 }
 
 .grand-total-row .total-value {
     background-color: rgba(218, 172, 20, 0.25);
     font-size: 0.9rem;
     font-weight: 900;
-    white-space: normal; /* السماح بتمدد النص بدلاً من nowrap */
+    white-space: nowrap;
 }
 
+/* 3. محاذاة وتنسيق الرمز ليكون محاذياً للرقم في سطر واحد */
+.riyal-symbol {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px; /* مسافة بين الرقم والرمز */
+}
 .closing-wish {
     text-align: center;
     font-size: 1.02rem;
