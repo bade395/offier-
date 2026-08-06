@@ -620,11 +620,11 @@ body {
 
 /* New Saudi Riyal Symbol - Rubik ExtraBold */
 .riyal-symbol {
-   font-family: 'Rubik', sans-serif;
-    font-weight: 800; /* ExtraBold */
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800; /* الوزن ExtraBold */
     font-style: normal;
-    font-size: 1em;
     display: inline-block;
+    direction: ltr;
     white-space: nowrap;
     vertical-align: baseline;
 }
