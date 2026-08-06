@@ -620,14 +620,14 @@ body {
 
 /* New Saudi Riyal Symbol - Rubik ExtraBold */
 .riyal-symbol {
-    font-family: 'Rubik', sans-serif;
-    font-weight: 800;
+   font-family: 'Rubik', sans-serif;
+    font-weight: 800; /* ExtraBold */
+    font-style: normal;
     font-size: 1em;
-    display: inline;
+    display: inline-block;
     white-space: nowrap;
     vertical-align: baseline;
 }
-
 /* ----------------------------------------------------
    3. FIXED BOTTOM FOOTER (في أسفل الصفحة تماماً في النطاق السفلي)
    ---------------------------------------------------- */
