@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrintPdf = document.getElementById('btn-print-pdf');
 
     // Saudi Riyal New Symbol (^ in Rubik ExtraBold = new riyal glyph)
-    const RIYAL = '<span class="riyal-symbol">^</span>';
+    const RIYAL = '<img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">';
 
     // Format number to standard decimal
     function formatMoney(amount, decimals = 1) {
