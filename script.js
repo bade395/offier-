@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // جعل القيم الأولية فارغة / مصفرة
     const defaultItems = [
-        { carType: 'KIA PEGAS', quantity: '1', duration: '1', typeOfRent: 'Yearly / سنوي', rentalPrice: '1869.60', isCustom: false },
-        { carType: 'Suzuki Dzire or Similar', quantity: '1', duration: '1', typeOfRent: 'Yearly / سنوي', rentalPrice: '1869.60', isCustom: false },
-        { carType: 'HYUNDAI GRAND i10', quantity: '1', duration: '1', typeOfRent: 'Yearly / سنوي', rentalPrice: '1869.60', isCustom: false }
+        { carType: 'HYUNDAI GRAND i10', quantity: '', duration: '', typeOfRent: 'Yearly / سنوي', rentalPrice: '', isCustom: false }
     ];
 
     const CAR_OPTIONS = [
@@ -51,11 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnReset = document.getElementById('btn-reset');
     const btnPrintPdf = document.getElementById('btn-print-pdf');
 
-    // الحد الأقصى للمسموح به في الصفحة الأولى قبل التدوير للصفحة الثانية
     const MAX_PAGE1_CAPACITY = 20;
 
-    function formatMoney(amount, decimals = 1) {
-        if (isNaN(amount)) return '0.0';
+    function formatMoney(amount, decimals = 2) {
+        if (isNaN(amount) || amount === 0) return '0.00';
         return amount.toLocaleString('en-US', {
             minimumFractionDigits: decimals,
             maximumFractionDigits: 2
@@ -63,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function parseNum(str, isDecimal = false) {
+        if (!str) return 0;
         const clean = String(str).replace(/[^\d.]/g, '');
         const n = isDecimal ? parseFloat(clean) : parseInt(clean);
         return isNaN(n) ? 0 : n;
@@ -89,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const qty = parseNum(item.quantity, false);
             const dur = parseNum(item.duration, false);
             const price = parseNum(item.rentalPrice, true);
+            
             const lineTotal = qty * dur * price;
             const lineVat = lineTotal * 0.15;
             const lineGrand = lineTotal + lineVat;
@@ -103,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (row) {
-                row.cells[5].innerHTML = formatMoney(lineTotal, 1);
-                row.cells[6].innerHTML = formatMoney(lineVat, 1);
-                row.cells[7].innerHTML = formatMoney(lineGrand, 1);
+                row.cells[5].innerHTML = lineTotal > 0 ? formatMoney(lineTotal, 2) : '0.00';
+                row.cells[6].innerHTML = lineVat > 0 ? formatMoney(lineVat, 2) : '0.00';
+                row.cells[7].innerHTML = lineGrand > 0 ? formatMoney(lineGrand, 2) : '0.00';
             }
         });
 
@@ -143,10 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return `
             <td>${carFieldHtml}</td>
             <td>
-                <input type="text" inputmode="numeric" class="editable-field table-input" value="${item.quantity}" data-index="${index}" data-key="quantity" placeholder="1">
+                <input type="text" inputmode="numeric" class="editable-field table-input" value="${item.quantity}" data-index="${index}" data-key="quantity" placeholder="0">
             </td>
             <td>
-                <input type="text" inputmode="numeric" class="editable-field table-input" value="${item.duration}" data-index="${index}" data-key="duration" placeholder="1">
+                <input type="text" inputmode="numeric" class="editable-field table-input" value="${item.duration}" data-index="${index}" data-key="duration" placeholder="0">
             </td>
             <td>
                 <select class="table-select" data-index="${index}" data-key="typeOfRent">
@@ -158,9 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>
                 <input type="text" inputmode="decimal" class="editable-field table-input price-input" value="${item.rentalPrice}" data-index="${index}" data-key="rentalPrice" placeholder="0.00">
             </td>
-            <td>${formatMoney(lineTotal, 1)}</td>
-            <td>${formatMoney(lineVat, 1)}</td>
-            <td>${formatMoney(lineGrand, 1)}</td>
+            <td>${lineTotal > 0 ? formatMoney(lineTotal, 2) : '0.00'}</td>
+            <td>${lineVat > 0 ? formatMoney(lineVat, 2) : '0.00'}</td>
+            <td>${lineGrand > 0 ? formatMoney(lineGrand, 2) : '0.00'}</td>
             <td class="no-print row-action-col">
                 ${items.length > 1 ? `<button type="button" class="btn-del-row" data-index="${index}">×</button>` : ''}
             </td>
@@ -171,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         itemsTbody.innerHTML = '';
         if (itemsTbody2) itemsTbody2.innerHTML = '';
 
-        // يستوعب حتى 20 صفاً في الصفحة الأولى ديناميكياً
         const page1Cutoff = Math.min(items.length, MAX_PAGE1_CAPACITY);
         const page1Items = items.slice(0, page1Cutoff);
         const page2Items = items.slice(page1Cutoff);
@@ -243,10 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
     btnAddItem.addEventListener('click', () => {
         items.push({
             carType: CAR_OPTIONS[0],
-            quantity: '1',
-            duration: '1',
+            quantity: '',
+            duration: '',
             typeOfRent: 'Yearly / سنوي',
-            rentalPrice: '1500.00',
+            rentalPrice: '',
             isCustom: false
         });
         renderItems();
@@ -259,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnReset.addEventListener('click', () => {
         if (confirm('هل أنت تأكد من إعادة ضبط البيانات إلى الحالة الأصلية؟')) {
             items = JSON.parse(JSON.stringify(defaultItems));
-            document.getElementById('client-name').value = 'شركة المهمة الذكية لخدمات الأعمال';
+            document.getElementById('client-name').value = '';
             generateAutoMeta();
             renderItems();
         }
