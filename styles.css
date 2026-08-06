@@ -1,6 +1,3 @@
-/* ----------------------------------------------------
-   Design Tokens & System Variables
-   ---------------------------------------------------- */
 :root {
     --primary-blue: #1e3b6e;
     --primary-gold: #c59b27;
@@ -17,7 +14,6 @@
     --font-serif: 'Amiri', serif;
 }
 
-/* Base Setup */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -34,9 +30,6 @@ body {
     padding-bottom: 40px;
 }
 
-/* ----------------------------------------------------
-   Admin Control Bar (Top Fixed Bar)
-   ---------------------------------------------------- */
 .admin-control-bar {
     position: sticky;
     top: 0;
@@ -112,9 +105,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* ----------------------------------------------------
-   Document Preview Container & Pages Layout
-   ---------------------------------------------------- */
 .document-wrapper {
     display: flex;
     flex-direction: column;
@@ -135,9 +125,6 @@ body {
     overflow: hidden;
 }
 
-/* ----------------------------------------------------
-   1. FIXED TOP HEADER (في أعلى الصفحة تماماً في النطاق العلوي)
-   ---------------------------------------------------- */
 .doc-header-fixed {
     position: absolute;
     top: 5mm;
@@ -185,24 +172,26 @@ body {
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));
 }
 
-/* ----------------------------------------------------
-   2. INNER DOCUMENT BODY (داخلياً بين الحد العلوي والحد السفلي)
-   ---------------------------------------------------- */
+/* تعديل الهامش العلوي ليصبح 42mm لنزول بداية المحتوى مع حدود الصفحة تماماً */
 .doc-inner-body {
     position: absolute;
-    top: 36mm;
-    bottom: 18mm;
+    top: 42mm; 
+    bottom: 16mm;
     left: 14mm;
     right: 14mm;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow: hidden;
+}
+
+.content-block {
+    width: 100%;
 }
 
 .doc-title-bar {
     text-align: center;
-    margin: 2px 0 6px 0;
+    margin: 0 0 8px 0;
 }
 
 .doc-title {
@@ -220,7 +209,7 @@ body {
     align-items: center;
     font-size: 0.88rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     padding: 0 2px;
 }
 
@@ -234,7 +223,6 @@ body {
     color: var(--text-dark);
 }
 
-/* Editable Inputs styling in document */
 .editable-field {
     background: transparent;
     border: 1px dashed transparent;
@@ -259,9 +247,8 @@ body {
     font-weight: 700;
 }
 
-/* Client Section */
 .client-section {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     padding: 0 2px;
 }
 
@@ -283,9 +270,10 @@ body {
 }
 
 .greeting-text {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    text-align: center;
 }
 
 .intro-text {
@@ -294,75 +282,73 @@ body {
     line-height: 1.35;
 }
 
-/* Items Table */
 .items-table-section {
-    margin-bottom: 6px;
+    margin-bottom: 0px;
 }
 
 .quote-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     font-size: 0.8rem;
     text-align: center;
+    table-layout: fixed;
 }
 
 .quote-table th {
     background-color: #3d3010;
     color: #e8c84a;
-    padding: 5px 3px;
+    padding: 4px 1px;
     border: 1px solid #2a1f00;
     font-weight: 800;
+    font-size: 0.68rem;
     line-height: 1.15;
+    white-space: nowrap;
+    overflow: visible;
 }
 
 .en-head {
-    font-size: 0.7rem;
+    font-size: 0.60rem;
     font-weight: 400;
     display: block;
     color: #d4a827;
 }
 
-/* Odd rows = white/cream */
 .quote-table tbody tr:nth-child(odd) td {
     border: 1px solid #b8960c;
-    padding: 4px 3px;
+    padding: 3px 2px;
     vertical-align: middle;
     background-color: rgba(255, 253, 235, 0.85);
     font-weight: 700;
     color: #1a1a1a;
 }
 
-/* Even rows = warm gold tint */
-/* 1. السكوت عن العرض الثابت والسماح للجدول بالتكيف */
-.quote-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 6px;
-    font-size: 0.8rem;
-    text-align: center;
-    table-layout: auto; /* يجعل الخانات تتكيف حسب طول المحتوى بدلاً من التوزيع الثابت */
+.quote-table tbody tr:nth-child(even) td {
+    border: 1px solid #b8960c;
+    padding: 3px 2px;
+    vertical-align: middle;
+    background-color: rgba(218, 172, 20, 0.18);
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
-/* 2. ضبط الخلايا للتوسع تلقائياً مع المحتوى */
-.quote-table th, 
 .quote-table td {
-    white-space: normal; /* يسمح بالنزل لسطر جديد إذا كان النص طويلاً جداً */
-    word-break: break-word; /* يمنع خروج الكلمات الطويلة خارج الخلية */
-    padding: 4px 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* 3. جعل حقول الإدخال المرنة تتكيف مع حجم النص */
 .table-input {
     width: 100%;
-    min-width: 50px; /* حد أدنى مناسب لعدم اختفاء الحقل */
     text-align: center;
     font-size: 0.8rem;
     box-sizing: border-box;
 }
+
 .table-select {
     width: 100%;
     text-align: center;
+    text-align-last: center;
     background: transparent;
     border: 1px dashed transparent;
     font-family: inherit;
@@ -373,6 +359,47 @@ body {
 .table-select:hover, .table-select:focus {
     background: #ffffff;
     border-color: #3b82f6;
+}
+
+.car-type-select {
+    width: 100%;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-align: center;
+    text-align-last: center;
+    background: transparent;
+    border: 1px dashed transparent;
+    color: inherit;
+    padding: 2px 0;
+    cursor: pointer;
+}
+.car-type-select:hover, .car-type-select:focus {
+    background: #ffffff;
+    border-color: #3b82f6;
+}
+
+.custom-car-input-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+}
+.car-type-input {
+    flex: 1;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-align: center;
+}
+.btn-toggle-select {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    padding: 1px 4px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .btn-del-row {
@@ -391,18 +418,18 @@ body {
 }
 .btn-del-row:hover { background: #dc2626; }
 
-/* 1. زيادة عرض جدول الإجماليات ليأخذ مساحة أكبر وتوسيطه */
+/* جدول الإجماليات لاصق تحت الجدول بحدود صفرية فوقية */
 .totals-summary-container {
     display: flex;
     justify-content: center;
-    margin-top: 6px;
+    margin-top: -1px;
     width: 100%;
 }
 
 .totals-table {
     border-collapse: collapse;
-    width: 100%; /* اجعل الجدول يمتد بعرض المنطقة المتاحة */
-    max-width: 500px; /* أو يمكنك زيادتها لـ 600px إذا أردته أعرض */
+    width: 100%;
+    max-width: 500px;
     font-size: 0.85rem;
     font-weight: 800;
     table-layout: auto;
@@ -410,7 +437,7 @@ body {
 
 .totals-table td {
     border: 1px solid #b8960c;
-    padding: 6px 12px;
+    padding: 5px 12px;
 }
 
 .total-label {
@@ -421,14 +448,13 @@ body {
     width: 60%;
 }
 
-/* 2. ضبط خانة القيم لضمان وجود الرمز يسار الرقم دائماً في سطر واحد */
 .total-value {
     background-color: rgba(255, 253, 235, 0.9);
-    direction: ltr; /* يضمن الترتيب من اليسار لليمين: الرقم ثم الرمز أو العكس */
+    direction: ltr;
     font-family: sans-serif;
     color: #1a1a1a;
     text-align: center;
-    white-space: nowrap; /* يمنع نزول الرمز أسفل/فوق الرقم نهائياً */
+    white-space: nowrap;
     width: 40%;
 }
 
@@ -444,31 +470,74 @@ body {
     white-space: nowrap;
 }
 
-/* 3. محاذاة وتنسيق الرمز ليكون محاذياً للرقم في سطر واحد */
 .riyal-symbol {
+    width: 1em;
+    height: 1em;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 4px; /* مسافة بين الرقم والرمز */
-}
-.closing-wish {
-    text-align: center;
-    font-size: 1.02rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin: 6px 0;
+    margin-right: 4px;
 }
 
-/* Centered greeting line */
-.greeting-text {
-    font-size: 0.95rem;
+/* قسم الختم ملتصق تحت الإجماليات */
+.closing-section-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.closing-wish {
+    text-align: center;
+    font-size: 0.98rem;
     font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.closing-salutation-bottom {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.salutation-text {
+    font-size: 0.95rem;
+    font-weight: 800;
     margin-bottom: 4px;
     text-align: center;
 }
 
-/* 2-COLUMN BILINGUAL TERMS & CONDITIONS */
+.company-sign-wrapper {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+.company-sign-title {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: var(--text-dark);
+}
+
+.official-stamp-box {
+    margin-top: 2px;
+    width: 140px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.official-stamp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
 .terms-section {
-    margin-top: 4px;
+    margin-top: 0px;
     font-size: 0.74rem;
     line-height: 1.3;
 }
@@ -480,117 +549,27 @@ body {
     align-items: start;
 }
 
-.terms-col-ar {
-    text-align: right;
-}
+.terms-col-ar { text-align: right; }
+.terms-col-en { text-align: left; font-family: sans-serif; }
 
-.terms-col-en {
-    text-align: left;
-    font-family: sans-serif;
-}
-
-.terms-title {
+.terms-title, .terms-title-en {
     font-size: 0.85rem;
     font-weight: 800;
     margin-bottom: 3px;
     color: var(--text-dark);
 }
 
-.terms-title-en {
-    font-size: 0.85rem;
-    font-weight: 800;
-    margin-bottom: 3px;
-    color: var(--text-dark);
-    font-family: sans-serif;
-}
+.term-unit { margin-bottom: 4px; }
+.term-ar-head, .term-en-head { font-weight: 800; color: var(--text-dark); }
+.term-ar-text, .term-en-text { margin-top: 1px; }
 
-.term-unit {
-    margin-bottom: 4px;
-}
+.term-list-ar, .term-list-en { list-style-type: none; }
+.term-list-ar { padding-right: 4px; }
+.term-list-en { padding-left: 4px; }
 
-.term-ar-head {
-    font-weight: 800;
-    color: var(--text-dark);
-}
-
-.term-ar-text, .term-en-text {
-    margin-top: 1px;
-}
-
-.term-en-head {
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-.term-list-ar {
-    list-style-type: none;
-    padding-right: 4px;
-}
-
-.term-list-ar li::before {
+.term-list-ar li::before, .term-list-en li::before {
     content: "• ";
     font-weight: bold;
-}
-
-.term-list-en {
-    list-style-type: none;
-    padding-left: 4px;
-}
-
-.term-list-en li::before {
-    content: "• ";
-    font-weight: bold;
-}
-
-/* Page 2 Closing - centered in middle of page */
-.closing-salutation {
-    margin: 16px 0 8px 0;
-    text-align: center;
-}
-
-/* Closing at the VERY BOTTOM of page 2 */
-.closing-salutation-bottom {
-    margin-top: auto;
-    padding-top: 12px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.salutation-text {
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin-bottom: 6px;
-    text-align: center;
-}
-
-.company-sign-wrapper {
-    display: inline-block;
-    text-align: center;
-    position: relative;
-}
-
-.company-sign-title {
-    font-size: 0.98rem;
-    font-weight: 900;
-    color: var(--text-dark);
-}
-
-.official-stamp-box {
-    margin-top: 2px;
-    width: 160px;
-    height: 95px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.official-stamp-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
 .bank-details-section {
@@ -630,17 +609,6 @@ body {
 .font-bold { font-weight: 800; }
 .font-en { font-family: sans-serif; font-weight: 700; direction: ltr; }
 
-/* New Saudi Riyal Symbol - Rubik ExtraBold */
-.riyal-symbol {
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 2px;
-}
-/* ----------------------------------------------------
-   3. FIXED BOTTOM FOOTER (في أسفل الصفحة تماماً في النطاق السفلي)
-   ---------------------------------------------------- */
 .doc-footer-fixed {
     position: absolute;
     bottom: 5mm;
@@ -665,9 +633,6 @@ body {
     background-color: var(--primary-blue);
 }
 
-/* ----------------------------------------------------
-   Print & PDF Export Media Query Rules (@media print)
-   ---------------------------------------------------- */
 @media print {
     @page {
         size: A4 portrait;
@@ -712,13 +677,24 @@ body {
         padding: 0 !important;
     }
 
-    .table-select {
-        appearance: none;
-        -webkit-appearance: none;
+    .table-select, .car-type-select {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
         border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+        font-size: 0.74rem !important;
+        font-weight: 800 !important;
+        color: #000000 !important;
+        text-align: center !important;
+        text-align-last: center !important;
+        width: 100% !important;
+        padding: 0 !important;
     }
 
-    .row-action-col {
+    .btn-toggle-select, .row-action-col {
         display: none !important;
     }
 }
