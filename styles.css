@@ -128,7 +128,7 @@ body {
     height: 297mm;
     min-height: 297mm;
     max-height: 297mm;
-    background: url('assets/bg.jpg') no-repeat center center / 100% 100% !important;
+    background: url('https://i.postimg.cc/Bbs40NJc/alkhlfyt.jpg') no-repeat center center / 100% 100% !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
     box-sizing: border-box;
@@ -689,7 +689,7 @@ body {
         box-shadow: none !important;
         page-break-after: always !important;
         page-break-inside: avoid !important;
-        background: url('assets/bg.jpg') no-repeat center center / 100% 100% !important;
+        background: url('https://i.postimg.cc/Bbs40NJc/alkhlfyt.jpg') no-repeat center center / 100% 100% !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
