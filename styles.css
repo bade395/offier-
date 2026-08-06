@@ -398,25 +398,22 @@ body {
     margin-top: 6px;
 }
 
+/* 1. جعل عرض الجدول مرن وإلغاء التوزيع الثابت */
 .totals-table {
     border-collapse: collapse;
-    width: 340px;
+    width: auto; /* السماح للجدول بالتمدد حسب الحاجة بدلاً من 340px */
+    min-width: 340px; /* الحفاظ على حد أدنى للعرض للشكل الجمالي */
     font-size: 0.85rem;
     font-weight: 800;
-    table-layout: fixed;
+    table-layout: auto; /* تغيير من fixed إلى auto */
 }
 
-.totals-table colgroup col:first-child {
-    width: 65%;
-}
-.totals-table colgroup col:last-child {
-    width: 35%;
-}
-
+/* 2. السماح للكلمات بالنزول لسطر جديد إذا لزم الأمر وإلغاء nowrap */
 .totals-table td {
     border: 1px solid #b8960c;
     padding: 5px 10px;
-    white-space: nowrap;
+    white-space: normal; /* تغيير من nowrap إلى normal */
+    word-break: break-word; /* منع الكلمات من الخروج عن الخلية */
 }
 
 .total-label {
@@ -432,20 +429,20 @@ body {
     font-family: sans-serif;
     color: #1a1a1a;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal; /* السماح بتمدد النص */
 }
 
 .grand-total-row .total-label {
     background-color: #5a4a1e;
     color: #f0d060;
-    white-space: nowrap;
+    white-space: normal; /* السماح بتمدد النص بدلاً من nowrap */
 }
 
 .grand-total-row .total-value {
     background-color: rgba(218, 172, 20, 0.25);
     font-size: 0.9rem;
     font-weight: 900;
-    white-space: nowrap;
+    white-space: normal; /* السماح بتمدد النص بدلاً من nowrap */
 }
 
 .closing-wish {
