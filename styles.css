@@ -1,3 +1,6 @@
+/* ----------------------------------------------------
+   1. Design Tokens & System Variables
+   ---------------------------------------------------- */
 :root {
     --primary-blue: #1e3b6e;
     --primary-gold: #c59b27;
@@ -14,6 +17,9 @@
     --font-serif: 'Amiri', serif;
 }
 
+/* ----------------------------------------------------
+   2. Base Setup
+   ---------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -30,6 +36,9 @@ body {
     padding-bottom: 40px;
 }
 
+/* ----------------------------------------------------
+   3. Admin Control Bar
+   ---------------------------------------------------- */
 .admin-control-bar {
     position: sticky;
     top: 0;
@@ -105,6 +114,19 @@ body {
     transform: translateY(-1px);
 }
 
+.btn-export-pdf {
+    background-color: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+}
+.btn-export-pdf:hover {
+    background-color: #0369a1;
+    transform: translateY(-1px);
+}
+
+/* ----------------------------------------------------
+   4. Document Preview Container & Pages Layout
+   ---------------------------------------------------- */
 .document-wrapper {
     display: flex;
     flex-direction: column;
@@ -123,8 +145,15 @@ body {
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
 }
 
+/* ----------------------------------------------------
+   5. Top Header & Brand Styling
+   ---------------------------------------------------- */
 .doc-header-fixed {
     position: absolute;
     top: 5mm;
@@ -142,15 +171,19 @@ body {
 }
 
 .company-title {
+    font-family: var(--font-arabic) !important;
     font-size: 2.15rem;
     font-weight: 900;
     color: var(--primary-blue);
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 2px;
-    letter-spacing: -0.5px;
+    letter-spacing: normal !important;
+    direction: rtl;
+    text-align: center;
 }
 
 .company-sub {
+    font-family: var(--font-arabic) !important;
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--primary-blue);
@@ -172,10 +205,12 @@ body {
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));
 }
 
-/* تعديل الهامش العلوي ليصبح 42mm لنزول بداية المحتوى مع حدود الصفحة تماماً */
+/* ----------------------------------------------------
+   6. Inner Document Body Layout
+   ---------------------------------------------------- */
 .doc-inner-body {
     position: absolute;
-    top: 42mm; 
+    top: 40mm; 
     bottom: 16mm;
     left: 14mm;
     right: 14mm;
@@ -226,7 +261,7 @@ body {
 .editable-field {
     background: transparent;
     border: 1px dashed transparent;
-    font-family: inherit;
+    font-family: var(--font-arabic) !important;
     font-size: inherit;
     font-weight: inherit;
     color: inherit;
@@ -282,6 +317,9 @@ body {
     line-height: 1.35;
 }
 
+/* ----------------------------------------------------
+   7. Tables & Pricing Grid
+   ---------------------------------------------------- */
 .items-table-section {
     margin-bottom: 0px;
 }
@@ -316,7 +354,7 @@ body {
 
 .quote-table tbody tr:nth-child(odd) td {
     border: 1px solid #b8960c;
-    padding: 3px 2px;
+    padding: 2px 2px;
     vertical-align: middle;
     background-color: rgba(255, 253, 235, 0.85);
     font-weight: 700;
@@ -325,7 +363,7 @@ body {
 
 .quote-table tbody tr:nth-child(even) td {
     border: 1px solid #b8960c;
-    padding: 3px 2px;
+    padding: 2px 2px;
     vertical-align: middle;
     background-color: rgba(218, 172, 20, 0.18);
     font-weight: 700;
@@ -418,7 +456,13 @@ body {
 }
 .btn-del-row:hover { background: #dc2626; }
 
-/* جدول الإجماليات لاصق تحت الجدول بحدود صفرية فوقية */
+/* ----------------------------------------------------
+   8. Totals & Stamp Wrapper Section
+   ---------------------------------------------------- */
+#quote-summary-and-stamp {
+    width: 100%;
+}
+
 .totals-summary-container {
     display: flex;
     justify-content: center;
@@ -478,9 +522,8 @@ body {
     margin-right: 4px;
 }
 
-/* قسم الختم ملتصق تحت الإجماليات */
 .closing-section-wrapper {
-    margin-top: 10px;
+    margin-top: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -536,6 +579,9 @@ body {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
+/* ----------------------------------------------------
+   9. Terms & Bank Section
+   ---------------------------------------------------- */
 .terms-section {
     margin-top: 0px;
     font-size: 0.74rem;
@@ -609,6 +655,9 @@ body {
 .font-bold { font-weight: 800; }
 .font-en { font-family: sans-serif; font-weight: 700; direction: ltr; }
 
+/* ----------------------------------------------------
+   10. Fixed Bottom Footer
+   ---------------------------------------------------- */
 .doc-footer-fixed {
     position: absolute;
     bottom: 5mm;
@@ -619,6 +668,8 @@ body {
     font-weight: 800;
     color: var(--primary-blue);
     z-index: 10;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 .footer-content {
@@ -633,6 +684,29 @@ body {
     background-color: var(--primary-blue);
 }
 
+/* ----------------------------------------------------
+   11. PDF Rendering Helper Classes
+   ---------------------------------------------------- */
+body.rendering-pdf {
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.rendering-pdf .document-wrapper {
+    margin: 0 !important;
+    gap: 0 !important;
+}
+
+body.rendering-pdf .a4-page {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* ----------------------------------------------------
+   12. Print Media Rules (@media print)
+   ---------------------------------------------------- */
 @media print {
     @page {
         size: A4 portrait;
