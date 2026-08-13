@@ -371,7 +371,6 @@ body {
     color: #1a1a1a;
 }
 
-/* السماح بالتفاف النص وتسهيل القراءة للحقول */
 .quote-table td, 
 .table-select, 
 .car-type-input {
@@ -379,7 +378,6 @@ body {
     word-break: break-word !important;
 }
 
-/* حل اقتصاص خانات الإجمالي */
 .total-cell, .price-cell {
     white-space: nowrap !important;
     font-size: 10px !important;
@@ -590,14 +588,14 @@ body {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
-/* الملاحظات والشروط المترجمة أسفل الختم */
+/* الملاحظات والشروط المترجمة أسفل الختم (ضبط اتجاه العربي للجهة اليمنى والإنجليزي لليسار) */
 .terms-translation-container {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     margin-top: 10px;
     width: 100%;
-    direction: ltr;
+    direction: rtl; /* وضع الاتجاه العام لليمين لتوافق العربية يمين والإنجليزي يسار */
 }
 
 .terms-box {
