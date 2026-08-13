@@ -96,14 +96,15 @@
                         <table class="quote-table" id="items-table">
                             <thead>
                                 <tr>
-                                    <th style="width: 22%;">نوع السياره<br><span class="en-head">Car Type</span></th>
+                                    <th style="width: 20%;">نوع السياره<br><span class="en-head">Car Type</span></th>
                                     <th style="width: 5%;">الكمية<br><span class="en-head">Qty</span></th>
                                     <th style="width: 5%;">المدة<br><span class="en-head">Duration</span></th>
-                                    <th style="width: 14%;">نوع الايجار<br><span class="en-head">Type of Rent</span></th>
-                                    <th style="width: 13%;">سعر الايجار<br><span class="en-head">Rental Price</span></th>
+                                    <th style="width: 12%;">نوع الايجار<br><span class="en-head">Type of Rent</span></th>
+                                    <th style="width: 12%;">سعر الايجار<br><span class="en-head">Rental Price</span></th>
                                     <th style="width: 10%;">الإجمالي<br><span class="en-head">TOTAL</span></th>
-                                    <th style="width: 14%;">الضريبة 15%<br><span class="en-head">Vat 15%</span></th>
-                                    <th style="width: 14%;">الإجمالي مع الضريبة<br><span class="en-head">Total with VAT</span></th>
+                                    <th style="width: 13%;">الضريبة 15%<br><span class="en-head">Vat 15%</span></th>
+                                    <th style="width: 13%;">الإجمالي مع الضريبة<br><span class="en-head">Total with VAT</span></th>
+                                    <th style="width: 10%;">سعر الكيلومتر الزائد<br><span class="en-head">Extra KM Price</span></th>
                                     <th class="no-print row-action-col" style="width: 3%;"></th>
                                 </tr>
                             </thead>
@@ -122,15 +123,15 @@
                                 </colgroup>
                                 <tr>
                                     <td class="total-label">الإجمالي TOTAL</td>
-                                    <td class="total-value"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-net">0.00</span></td>
+                                    <td class="total-value total-cell"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-net">0.00</span></td>
                                 </tr>
                                 <tr>
                                     <td class="total-label">الضريبة %15 VAT</td>
-                                    <td class="total-value"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-vat">0.00</span></td>
+                                    <td class="total-value total-cell"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-vat">0.00</span></td>
                                 </tr>
                                 <tr class="grand-total-row">
                                     <td class="total-label">الإجمالي مع الضريبة Total&nbsp;with&nbsp;VAT</td>
-                                    <td class="total-value"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-grand">0.00</span></td>
+                                    <td class="total-value total-cell"><img src="https://www.sama.gov.sa/ar-sa/Currency/Documents/Saudi_Riyal_Symbol-2.svg" alt="ر.س" class="riyal-symbol">&nbsp;<span id="sum-grand">0.00</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -147,6 +148,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- الملاحظات والشروط المترجمة أسفل الختم (العربي يمين والإنجليزي يسار) -->
+                        <div class="terms-translation-container">
+                            <div class="terms-box ar-box">
+                                <strong>الملاحظات والشروط:</strong>
+                                <textarea id="terms-ar" class="editable-field" placeholder="أدخل الملاحظات هنا..."></textarea>
+                            </div>
+                            <div class="terms-box en-box">
+                                <strong>Terms & Conditions:</strong>
+                                <textarea id="terms-en" class="editable-field" readonly placeholder="Translated terms..."></textarea>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
@@ -186,14 +200,15 @@
                         <table class="quote-table" id="items-table-2">
                             <thead>
                                 <tr>
-                                    <th style="width: 22%;">نوع السياره<br><span class="en-head">Car Type</span></th>
+                                    <th style="width: 20%;">نوع السياره<br><span class="en-head">Car Type</span></th>
                                     <th style="width: 5%;">الكمية<br><span class="en-head">Qty</span></th>
                                     <th style="width: 5%;">المدة<br><span class="en-head">Duration</span></th>
-                                    <th style="width: 14%;">نوع الايجار<br><span class="en-head">Type of Rent</span></th>
-                                    <th style="width: 13%;">سعر الايجار<br><span class="en-head">Rental Price</span></th>
+                                    <th style="width: 12%;">نوع الايجار<br><span class="en-head">Type of Rent</span></th>
+                                    <th style="width: 12%;">سعر الايجار<br><span class="en-head">Rental Price</span></th>
                                     <th style="width: 10%;">الإجمالي<br><span class="en-head">TOTAL</span></th>
-                                    <th style="width: 14%;">الضريبة 15%<br><span class="en-head">Vat 15%</span></th>
-                                    <th style="width: 14%;">الإجمالي مع الضريبة<br><span class="en-head">Total with VAT</span></th>
+                                    <th style="width: 13%;">الضريبة 15%<br><span class="en-head">Vat 15%</span></th>
+                                    <th style="width: 13%;">الإجمالي مع الضريبة<br><span class="en-head">Total with VAT</span></th>
+                                    <th style="width: 10%;">سعر الكيلومتر الزائد<br><span class="en-head">Extra KM Price</span></th>
                                     <th class="no-print row-action-col" style="width: 3%;"></th>
                                 </tr>
                             </thead>
