@@ -328,7 +328,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 0px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-align: center;
     table-layout: fixed;
 }
@@ -339,14 +339,15 @@ body {
     padding: 4px 1px;
     border: 1px solid #2a1f00;
     font-weight: 800;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     line-height: 1.15;
-    white-space: nowrap;
+    white-space: normal !important;
+    word-break: break-word !important;
     overflow: visible;
 }
 
 .en-head {
-    font-size: 0.60rem;
+    font-size: 0.58rem;
     font-weight: 400;
     display: block;
     color: #d4a827;
@@ -370,16 +371,26 @@ body {
     color: #1a1a1a;
 }
 
-.quote-table td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+/* السماح بالتفاف النص وتسهيل القراءة للحقول */
+.quote-table td, 
+.table-select, 
+.car-type-input {
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
+/* حل اقتصاص خانات الإجمالي */
+.total-cell, .price-cell {
+    white-space: nowrap !important;
+    font-size: 10px !important;
+    letter-spacing: -0.3px;
+    overflow: visible !important;
 }
 
 .table-input {
     width: 100%;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     box-sizing: border-box;
 }
 
@@ -390,7 +401,7 @@ body {
     background: transparent;
     border: 1px dashed transparent;
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-weight: 700;
     cursor: pointer;
 }
@@ -401,7 +412,7 @@ body {
 
 .car-type-select {
     width: 100%;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     font-family: inherit;
     text-align: center;
@@ -425,7 +436,7 @@ body {
 }
 .car-type-input {
     flex: 1;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 800;
     text-align: center;
 }
@@ -577,6 +588,56 @@ body {
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+/* الملاحظات والشروط المترجمة أسفل الختم */
+.terms-translation-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+    direction: ltr;
+}
+
+.terms-box {
+    width: 49%;
+    font-size: 0.78rem;
+}
+
+.terms-box strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--primary-blue);
+}
+
+.ar-box {
+    text-align: right;
+    direction: rtl;
+}
+
+.en-box {
+    text-align: left;
+    direction: ltr;
+}
+
+.terms-box textarea {
+    width: 100%;
+    height: 60px;
+    resize: none;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px dashed #b8960c;
+    border-radius: 4px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.terms-box textarea:focus {
+    background: #ffffff;
+    border-style: solid;
+    border-color: #3b82f6;
 }
 
 /* ----------------------------------------------------
@@ -749,6 +810,12 @@ body.rendering-pdf .a4-page {
         box-shadow: none !important;
         outline: none !important;
         padding: 0 !important;
+    }
+
+    .terms-box textarea {
+        border: none !important;
+        background: transparent !important;
+        resize: none !important;
     }
 
     .table-select, .car-type-select {
