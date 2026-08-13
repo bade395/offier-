@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const defaultItems = [
-        { carType: 'HYUNDAI GRAND i10', quantity: '', duration: '', typeOfRent: 'Yearly / سنوي', rentalPrice: '', isCustom: false }
+        { carType: 'HYUNDAI GRAND i10', quantity: '', duration: '', typeOfRent: 'Yearly / سنوي', rentalPrice: '', extraKmPrice: '', isCustom: false }
     ];
 
     const CAR_OPTIONS = [
@@ -158,9 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>
                 <input type="text" inputmode="decimal" class="editable-field table-input price-input" value="${item.rentalPrice}" data-index="${index}" data-key="rentalPrice" placeholder="0.00">
             </td>
-            <td>${lineTotal > 0 ? formatMoney(lineTotal, 2) : '0.00'}</td>
-            <td>${lineVat > 0 ? formatMoney(lineVat, 2) : '0.00'}</td>
-            <td>${lineGrand > 0 ? formatMoney(lineGrand, 2) : '0.00'}</td>
+            <td class="total-cell">${lineTotal > 0 ? formatMoney(lineTotal, 2) : '0.00'}</td>
+            <td class="total-cell">${lineVat > 0 ? formatMoney(lineVat, 2) : '0.00'}</td>
+            <td class="total-cell">${lineGrand > 0 ? formatMoney(lineGrand, 2) : '0.00'}</td>
+            <td>
+                <input type="text" inputmode="decimal" class="editable-field table-input" value="${item.extraKmPrice || ''}" data-index="${index}" data-key="extraKmPrice" placeholder="0.00">
+            </td>
             <td class="no-print row-action-col">
                 ${items.length > 1 ? `<button type="button" class="btn-del-row" data-index="${index}">×</button>` : ''}
             </td>
@@ -246,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: '',
             typeOfRent: 'Yearly / سنوي',
             rentalPrice: '',
+            extraKmPrice: '',
             isCustom: false
         });
         renderItems();
@@ -259,6 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm('هل أنت تأكد من إعادة ضبط البيانات إلى الحالة الأصلية؟')) {
             items = JSON.parse(JSON.stringify(defaultItems));
             document.getElementById('client-name').value = '';
+            const termsAr = document.getElementById('terms-ar');
+            const termsEn = document.getElementById('terms-en');
+            if (termsAr) termsAr.value = '';
+            if (termsEn) termsEn.value = '';
             generateAutoMeta();
             renderItems();
         }
@@ -268,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     });
 
-    // تنزيل ملف PDF مباشر مع معالجة الأبعاد تلقائياً بدون الشاشة البيضاء
     btnExportPdf.addEventListener('click', async () => {
         const element = document.getElementById('document-to-pdf');
         const refVal = quoteRefInput.value || 'Quotation';
@@ -276,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnExportPdf.innerText = 'جاري التحميل...';
         btnExportPdf.disabled = true;
 
-        // تهيئة محيط الصفحة أثناء التصوير لمنع تحرك الفوتر والسطور
         document.body.classList.add('rendering-pdf');
 
         if (document.fonts) {
@@ -310,6 +316,33 @@ document.addEventListener('DOMContentLoaded', () => {
             btnExportPdf.disabled = false;
         }
     });
+
+    // الترجمة التلقائية لمربع الملاحظات والشروط
+    const termsAr = document.getElementById('terms-ar');
+    const termsEn = document.getElementById('terms-en');
+    let translateTimeout;
+
+    if (termsAr && termsEn) {
+        termsAr.addEventListener('input', () => {
+            clearTimeout(translateTimeout);
+            const text = termsAr.value.trim();
+            if (!text) {
+                termsEn.value = '';
+                return;
+            }
+
+            translateTimeout = setTimeout(() => {
+                fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=ar&tl=en&dt=t&q=${encodeURIComponent(text)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data[0]) {
+                            termsEn.value = data[0].map(item => item[0]).join('');
+                        }
+                    })
+                    .catch(err => console.error('Translation error:', err));
+            }, 500);
+        });
+    }
 
     generateAutoMeta();
     renderItems();
