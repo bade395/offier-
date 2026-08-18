@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Supabase + Device tracking + Manager-only administration
     // ============================================================
     const SUPABASE_URL = "https://hlxthewbrberbrsueqj.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_lpCw-zOKEyHYzmXr8UEOIg_3UlbLSNN";
+    const SUPABASE_ANON_KEY = "sb_publishable_lpCw-zOKEyHYzmXr8UEOIg_3UlbLSNN";
 
     const SUPABASE_READY =
         typeof window.supabase !== 'undefined' &&
